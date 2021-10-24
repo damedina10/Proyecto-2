@@ -44,7 +44,10 @@
 //-------------------------------------------------------------------------------------------------
 void setup() {
   Serial.begin (115200);
-  
+
+  //Configuración de los botones
+  pinMode(boton1, INPUT_PULLUP);
+  pinMode(boton2, INPUT_PULLUP);
 
 }
 
