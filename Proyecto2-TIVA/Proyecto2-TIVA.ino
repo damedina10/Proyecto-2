@@ -24,6 +24,8 @@
 #define boton2 PF_0
 
 
+
+
 //-------------------------------------------------------------------------------------------------
 // Variables Locales
 //-------------------------------------------------------------------------------------------------
@@ -52,6 +54,10 @@ void setup() {
   //Configuración de los botones
   pinMode(boton1, INPUT_PULLUP);
   pinMode(boton2, INPUT_PULLUP);
+
+  //Configuración de la SD
+  pinMode(PB_5, OUTPUT);
+
 
 }
 
