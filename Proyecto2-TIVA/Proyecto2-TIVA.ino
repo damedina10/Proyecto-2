@@ -16,6 +16,8 @@
 #include <SPI.h>
 #include <SD.h>
 
+File archivo;
+
 //-------------------------------------------------------------------------------------------------
 // Definición de pines
 //-------------------------------------------------------------------------------------------------
@@ -31,7 +33,6 @@
 //-------------------------------------------------------------------------------------------------
 //Variable para que solo se lea un dato cuando se presiona el boton
 int estadoBoton1 = 0;
-
 
 
 
@@ -57,7 +58,13 @@ void setup() {
 
   //Configuración de la SD
   pinMode(PB_5, OUTPUT);
-
+  
+  SPI.setModule(2);
+    // Estamos Inicializando la tarjeta SD
+  if (!SD.begin(PB_5)) {
+    Serial.println("Ha ocurrido un error!");
+    return;
+  }
 
 }
 
@@ -83,4 +90,33 @@ void loop() {
   }
 
   delay(500);
+}
+
+//-------------------------------------------------------------------------------------------------
+// Función para guardar los datos en la memoria SD
+//-------------------------------------------------------------------------------------------------
+void memoriaSD(void){
+    //Se abre el documento para escribir
+    archivo = SD.open("Humedad.csv", FILE_WRITE);
+  
+  // Si se abrió el documento, entonces se escriben los datos
+  if (archivo) {
+    //Se muestra en el monitor que se están guardando los datos
+    Serial.println("Se guardó el siguiente dato: ");
+    Serial.print("Humedad: ");
+    Serial.println(humedad);
+
+    //Se imprimen los datos en la memoria SD
+    archivo.print("28/10/21,");
+    archivo.println(humedad);
+   
+    //Cerramos el documento
+    archivo.close();
+    Serial.println("Dato guardado exitosamente.");
+  } 
+  else {
+    //Si no se logra abrir el archivo, aparece un mensaje
+    Serial.println("No se pudo abrir el archivo");
+  }
+  
 }
