@@ -75,7 +75,12 @@ void loop() {
   if(estadoBoton1 == 1){
     
   }
-  
+
+  //Si se presiona el botón 2, se guardan los datos en la memoria SD
+  if(digitalRead(boton2)==0){
+    delay(150);
+    memoriaSD();
+  }
 
   delay(500);
 }
