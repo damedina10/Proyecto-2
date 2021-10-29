@@ -32,10 +32,9 @@ File archivo;
 //-------------------------------------------------------------------------------------------------
 // Variables Locales
 //-------------------------------------------------------------------------------------------------
-//Variable para que solo se lea un dato cuando se presiona el boton
-int estadoBoton1 = 0;
 
-
+//Variable para el dato del sensor proveniente del ESP32
+int humedad = 0;
 
 //-------------------------------------------------------------------------------------------------
 // Prototipo de funciones
@@ -74,10 +73,17 @@ void setup() {
 // Loop principal
 //-------------------------------------------------------------------------------------------------
 void loop() {
-  //Si se presiona el botón 1, s le dice al ESP32 que lea el dato
+  //Si se presiona el botón 1, se le dice al ESP32 que lea el dato
   if(digitalRead(boton1)==0){
     delay(150);
     Serial3.println("Realizar medición");
+  }
+
+  //Datos del sensor recibidos del ESP32
+  if(Serial3.available()>0){
+    //Se lee el dato y se guarda en una variable
+    humedad = Serial3.readStringUntil('\n');
+    
   }
 
 
@@ -85,6 +91,7 @@ void loop() {
   if(digitalRead(boton2)==0){
     delay(150);
     memoriaSD();
+    Serial3.println("Guardar dato");
   }
 
   
