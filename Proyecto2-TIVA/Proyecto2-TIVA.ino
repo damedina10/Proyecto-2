@@ -52,6 +52,7 @@ void memoriaSD(void);
 //-------------------------------------------------------------------------------------------------
 void setup() {
   Serial.begin (115200);
+  Serial3.begin (115200);
 
   //Configuración de los botones
   pinMode(boton1, INPUT_PULLUP);
@@ -73,16 +74,12 @@ void setup() {
 // Loop principal
 //-------------------------------------------------------------------------------------------------
 void loop() {
-  //Si se presiona el botón 1, cambia el estado del botón a 1
+  //Si se presiona el botón 1, s le dice al ESP32 que lea el dato
   if(digitalRead(boton1)==0){
     delay(150);
-    estadoBoton1 = 1;
+    Serial3.println("Realizar medición");
   }
 
-  //Si el estado del botón 1 es 1, entonces se realiza la lectura
-  if(estadoBoton1 == 1){
-    
-  }
 
   //Si se presiona el botón 2, se guardan los datos en la memoria SD
   if(digitalRead(boton2)==0){
