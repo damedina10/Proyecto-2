@@ -76,7 +76,7 @@ void loop() {
   //Si se presiona el botón 1, se le dice al ESP32 que lea el dato
   if(digitalRead(boton1)==0){
     delay(150);
-    Serial3.println("Realizar medición");
+    Serial3.println("medicion");
   }
 
   //Datos del sensor recibidos del ESP32
@@ -91,7 +91,7 @@ void loop() {
   if(digitalRead(boton2)==0){
     delay(150);
     memoriaSD();
-    Serial3.println("Guardar dato");
+    Serial3.println("guardar");
   }
 
   
