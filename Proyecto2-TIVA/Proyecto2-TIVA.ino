@@ -28,15 +28,8 @@ File archivo;
 //Color del texto en la pantalla TFT
 #define celeste 0x1C7F
 
-//Notas musicales para el buzzer
-#define NOTE_C4  262
-#define NOTE_D4  294
-#define NOTE_E4  330
-#define NOTE_A4  440
-#define NOTE_B4  494
-
 //Buzzer
-#define buzzer PB_0
+#define sound PB_0
 
 //-------------------------------------------------------------------------------------------------
 // Variables Locales
@@ -45,27 +38,7 @@ File archivo;
 //Variable para el dato del sensor proveniente del ESP32
 String humedad = "";
 
-//notas para el buzzer
-int melody[] = {
-   NOTE_A4, NOTE_E4,
-   NOTE_A4, NOTE_E4,
-   NOTE_B4, NOTE_E4,
-   NOTE_B4, NOTE_E4,
-   NOTE_C4, NOTE_E4,
-   NOTE_C4, NOTE_E4,
-   NOTE_D4, NOTE_E4,
-   NOTE_D4, NOTE_E4, NOTE_B4};
 
-//Duración de las notas para el buzzer
-int noteDurations[] = {
-  1, 2, 
-  1, 2, 
-  1, 2, 
-  1, 2,
-  1, 2,
-  1, 2,
-  1, 2,
-  1, 1, 1};
 
 //-------------------------------------------------------------------------------------------------
 // Prototipo de funciones
@@ -99,7 +72,7 @@ void setup() {
   }
 
   //Configuración buzzer
-  pinMode(buzzer, OUTPUT);
+  pinMode(sound, OUTPUT);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -110,16 +83,41 @@ void loop() {
   if(digitalRead(boton1)==0){
     delay(150);
     Serial3.println("1");
-    //Sonido de medición
-    for (int thisNote = 0; thisNote < 9; thisNote++) {
-      int noteDuration = 1000/noteDurations[thisNote];
-      tone(buzzer, melody[thisNote],noteDuration);
+    //Sonido de medición 
+    tone(sound,440,100);
+    delay(100);
+    tone(sound,523.25,100);
+    delay(100);
+    tone(sound,587.33,100);
+    delay(200);
+    tone(sound,587.33,100);
+    delay(200);
+    tone(sound,587.33,100);
+    delay(100);
+    tone(sound,659.25,100);
+    delay(100);
+    tone(sound,698.45,100);
+    delay(200);
+    tone(sound,698.45,100);
+    delay(200);
+    tone(sound,698.45,100);
+    delay(100);
+    tone(sound,783.99,100);
+    delay(100);
+    tone(sound,659.25,100);
+    delay(200);
+    tone(sound,659.25,100);
+    delay(200);
+    tone(sound,587.33,100);
+    delay(100);
+    tone(sound,523.25,100);
+    delay(100);
+    tone(sound,523.25,100);
+    delay(100);
+    tone(sound,587.33,100);
+    delay(300);
 
-      int pauseBetweenNotes = noteDuration + 50;   
-      delay(pauseBetweenNotes);
-    
-      noTone(buzzer);    
-    }
+    noTone(sound);   
   }
 
   //Datos del sensor recibidos del ESP32
@@ -136,15 +134,38 @@ void loop() {
     memoriaSD();
     Serial3.println("2");
     //Sonido de guardado
-    for (int thisNote = 9; thisNote < 18; thisNote++) {
-      int noteDuration = 1000/noteDurations[thisNote];
-      tone(buzzer, melody[thisNote],noteDuration);
-
-      int pauseBetweenNotes = noteDuration + 50;   
-      delay(pauseBetweenNotes);
-    
-      noTone(buzzer);    
-    }
+    tone(sound,440,100);
+    delay(100);
+    tone(sound,523.25,100);
+    delay(100);
+    tone(sound,587.33,100);
+    delay(200);
+    tone(sound,587.33,100);
+    delay(200);
+    tone(sound,587.33,100);
+    delay(100);
+    tone(sound,659.25,100);
+    delay(100);
+    tone(sound,698.45,100);
+    delay(200);
+    tone(sound,698.45,100);
+    delay(200);
+    tone(sound,698.45,100);
+    delay(100);
+    tone(sound,783.99,100);
+    delay(100);
+    tone(sound,659.25,100);
+    delay(200);
+    tone(sound,659.25,100);
+    delay(200);
+    tone(sound,587.33,100);
+    delay(100);
+    tone(sound,523.25,100);
+    delay(100);
+    tone(sound,587.33,100);
+    delay(400);
+   
+    noTone(sound);    
   }
 
   
