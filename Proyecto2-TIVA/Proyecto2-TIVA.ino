@@ -36,7 +36,7 @@ File archivo;
 #define NOTE_B4  494
 
 //Buzzer
-#define buzzer PE_3
+#define buzzer PB_0
 
 //-------------------------------------------------------------------------------------------------
 // Variables Locales
