@@ -166,7 +166,8 @@ void memoriaSD(void){
     Serial.println(humedad);
 
     //Se imprimen los datos en la memoria SD
-    archivo.print("28/10/21,");
+    archivo.print("28/10/21");
+    archivo.print(",");
     archivo.println(humedad);
    
     //Cerramos el documento
