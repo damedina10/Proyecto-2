@@ -268,6 +268,31 @@ void loop() {
     delay(150);
     memoriaSD();
     Serial3.println("2");
+    //Fondo Blanco
+    FillRect(30, 30, 259, 179, 0xffff);
+    //Pantalla de carga
+    LCD_Bitmap(40, 40, 32, 32, gota);
+    LCD_Bitmap(144, 40, 32, 32, gota);
+    LCD_Bitmap(249, 40, 32, 32, gota);
+    delay(100);
+    LCD_Bitmap(40, 80, 32, 32, gota);
+    LCD_Bitmap(144, 80, 32, 32, gota);
+    LCD_Bitmap(249, 80, 32, 32, gota);
+    delay(100);
+    LCD_Bitmap(40, 120, 32, 32, gota);
+    LCD_Bitmap(144, 120, 32, 32, gota);
+    LCD_Bitmap(249, 120, 32, 32, gota);
+    delay(100);
+    LCD_Bitmap(40, 160, 32, 32, gota);
+    LCD_Bitmap(144, 160, 32, 32, gota);
+    LCD_Bitmap(249, 160, 32, 32, gota);
+    delay(100);
+    //Fondo Blanco
+    FillRect(30, 30, 259, 179, 0xffff);
+    //Si se escoge guardar un dato
+    LCD_Print("El dato se", 75, 80, 2, celeste, 0xffff);
+    LCD_Print("ha guardado", 70, 120, 2, celeste, 0xffff);
+    LCD_Print("exitosamente!", 60, 160, 2, celeste, 0xffff);
     //Sonido de guardado
     tone(sound,440,100);
     delay(100);
