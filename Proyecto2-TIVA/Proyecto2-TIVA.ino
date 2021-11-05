@@ -61,6 +61,7 @@ File archivo;
 #define LCD_DC PD_1
 #define LCD_CS PA_3
 
+
 //-------------------------------------------------------------------------------------------------
 // Variables Locales
 //-------------------------------------------------------------------------------------------------
@@ -108,19 +109,17 @@ void setup() {
   //Configuración de la SD
   pinMode(PB_5, OUTPUT);
   
-  SPI.setModule(2);
+  SPI.setModule(0);
     // Estamos Inicializando la tarjeta SD
   if (!SD.begin(PB_5)) {
     Serial.println("Ha ocurrido un error!");
     return;
-  }
-
+  
   //Configuración buzzer
   pinMode(sound, OUTPUT);
 
   //Pantalla 
   SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_OSC_MAIN|SYSCTL_XTAL_16MHZ);
-  SPI.setModule(0);
   LCD_Init();
   LCD_Clear(0x00);
   //Marco Negro
@@ -220,7 +219,7 @@ void loop() {
       LCD_Bitmap(170, 160, 32, 32, gota);
     }
     //Si hay una humedad moderada aparecen dos gotas
-     if(humedad.toInt() > 68){
+    if(humedad.toInt() > 68){
       LCD_Bitmap(107, 160, 32, 32, gota);
       LCD_Bitmap(144, 160, 32, 32, gota);
       LCD_Bitmap(180, 160, 32, 32, gota);
