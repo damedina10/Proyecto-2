@@ -164,7 +164,6 @@ void loop() {
     delay(100);
     tone(sound,587.33,100);
     delay(400);
-   
     noTone(sound);    
   }
 
