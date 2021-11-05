@@ -16,8 +16,28 @@
 #include <SPI.h>
 #include <SD.h>
 
+//Archivo para la SD
 File archivo;
 
+//Pantalla TFT
+#include <stdint.h>
+#include <stdbool.h>
+#include <TM4C123GH6PM.h>
+#include <SPI.h>
+#include "inc/hw_ints.h"
+#include "inc/hw_memmap.h"
+#include "inc/hw_types.h"
+#include "driverlib/debug.h"
+#include "driverlib/gpio.h"
+#include "driverlib/interrupt.h"
+#include "driverlib/rom_map.h"
+#include "driverlib/rom.h"
+#include "driverlib/sysctl.h"
+#include "driverlib/timer.h"
+
+#include "bitmaps.h"
+#include "font.h"
+#include "lcd_registers.h"
 //-------------------------------------------------------------------------------------------------
 // Definición de pines
 //-------------------------------------------------------------------------------------------------
@@ -30,6 +50,16 @@ File archivo;
 
 //Buzzer
 #define sound PB_0
+
+//Pines de la pantalla TFT
+// El SPI es el 0
+//MOSI va a PA_5
+//MISO va a PA_4
+//SCK va a PA_2
+
+#define LCD_RST PD_0
+#define LCD_DC PD_1
+#define LCD_CS PA_3
 
 //-------------------------------------------------------------------------------------------------
 // Variables Locales
