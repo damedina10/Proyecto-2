@@ -160,6 +160,24 @@ void setup() {
 // Loop principal
 //-------------------------------------------------------------------------------------------------
 void loop() {
+  //Menú principal 
+  if (estado == 0){
+    //Cambia el estado a 1
+    //Impresión en el monitor para que se vea pro
+    //Fondo Blanco
+    FillRect(30, 30, 259, 179, 0xffff);
+    String opciones = "Escoga una opcion:";
+    LCD_Print("Escoga una", 70, 60, 2, celeste, 0xffff);
+    LCD_Print("opcion:", 100, 80, 2, celeste, 0xffff);
+    String opcion1 = "1.Medicion";
+    LCD_Print(opcion1, 40, 110, 2, celeste, 0xffff);
+    String opcion2 = "2.Guardar dato";
+    LCD_Print(opcion2, 40, 150, 2, celeste, 0xffff);
+    delay(1000);
+    estado = 1;
+
+  }
+  
   //Si se presiona el botón 1, se le dice al ESP32 que lea el dato
   if(digitalRead(boton1)==0){
     delay(150);
@@ -199,6 +217,7 @@ void loop() {
     delay(300);
 
     noTone(sound);   
+    estado = 0;
   }
 
   //Datos del sensor recibidos del ESP32
@@ -245,7 +264,8 @@ void loop() {
     delay(100);
     tone(sound,587.33,100);
     delay(400);
-    noTone(sound);    
+    noTone(sound); 
+    estado = 0;   
   }
 
   
