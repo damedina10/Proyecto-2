@@ -68,7 +68,8 @@ File archivo;
 //Variable para el dato del sensor proveniente del ESP32
 String humedad = "";
 
-
+//Estado para que se muestre solo una vez el menú principal
+int estado = 0;
 
 //-------------------------------------------------------------------------------------------------
 // Prototipo de funciones
@@ -134,26 +135,7 @@ void setup() {
   String portada = "HumE";
   LCD_Print(portada, 120, 110, 2, celeste, 0xffff);
   LCD_Bitmap(200, 100, 32, 32, gota);
-  delay(1000);
-  //Fondo Blanco
-  FillRect(30, 30, 259, 179, 0xffff);
-  //Pantalla de carga
-  LCD_Bitmap(40, 40, 32, 32, gota);
-  LCD_Bitmap(144, 40, 32, 32, gota);
-  LCD_Bitmap(249, 40, 32, 32, gota);
-  delay(100);
-  LCD_Bitmap(40, 80, 32, 32, gota);
-  LCD_Bitmap(144, 80, 32, 32, gota);
-  LCD_Bitmap(249, 80, 32, 32, gota);
-  delay(100);
-  LCD_Bitmap(40, 120, 32, 32, gota);
-  LCD_Bitmap(144, 120, 32, 32, gota);
-  LCD_Bitmap(249, 120, 32, 32, gota);
-  delay(100);
-  LCD_Bitmap(40, 160, 32, 32, gota);
-  LCD_Bitmap(144, 160, 32, 32, gota);
-  LCD_Bitmap(249, 160, 32, 32, gota);
-  delay(100);
+  delay(3000);
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -163,7 +145,25 @@ void loop() {
   //Menú principal 
   if (estado == 0){
     //Cambia el estado a 1
-    //Impresión en el monitor para que se vea pro
+    //Fondo Blanco
+    FillRect(30, 30, 259, 179, 0xffff);
+    //Pantalla de carga
+    LCD_Bitmap(40, 40, 32, 32, gota);
+    LCD_Bitmap(144, 40, 32, 32, gota);
+    LCD_Bitmap(249, 40, 32, 32, gota);
+    delay(100);
+    LCD_Bitmap(40, 80, 32, 32, gota);
+    LCD_Bitmap(144, 80, 32, 32, gota);
+    LCD_Bitmap(249, 80, 32, 32, gota);
+    delay(100);
+    LCD_Bitmap(40, 120, 32, 32, gota);
+    LCD_Bitmap(144, 120, 32, 32, gota);
+    LCD_Bitmap(249, 120, 32, 32, gota);
+    delay(100);
+    LCD_Bitmap(40, 160, 32, 32, gota);
+    LCD_Bitmap(144, 160, 32, 32, gota);
+    LCD_Bitmap(249, 160, 32, 32, gota);
+    delay(100);
     //Fondo Blanco
     FillRect(30, 30, 259, 179, 0xffff);
     String opciones = "Escoga una opcion:";
@@ -173,15 +173,58 @@ void loop() {
     LCD_Print(opcion1, 40, 110, 2, celeste, 0xffff);
     String opcion2 = "2.Guardar dato";
     LCD_Print(opcion2, 40, 150, 2, celeste, 0xffff);
-    delay(1000);
     estado = 1;
-
   }
   
   //Si se presiona el botón 1, se le dice al ESP32 que lea el dato
   if(digitalRead(boton1)==0){
     delay(150);
     Serial3.println("1");
+    //Fondo Blanco
+    FillRect(30, 30, 259, 179, 0xffff);
+    //Pantalla de carga
+    LCD_Bitmap(40, 40, 32, 32, gota);
+    LCD_Bitmap(144, 40, 32, 32, gota);
+    LCD_Bitmap(249, 40, 32, 32, gota);
+    delay(100);
+    LCD_Bitmap(40, 80, 32, 32, gota);
+    LCD_Bitmap(144, 80, 32, 32, gota);
+    LCD_Bitmap(249, 80, 32, 32, gota);
+    delay(100);
+    LCD_Bitmap(40, 120, 32, 32, gota);
+    LCD_Bitmap(144, 120, 32, 32, gota);
+    LCD_Bitmap(249, 120, 32, 32, gota);
+    delay(100);
+    LCD_Bitmap(40, 160, 32, 32, gota);
+    LCD_Bitmap(144, 160, 32, 32, gota);
+    LCD_Bitmap(249, 160, 32, 32, gota);
+    delay(100);
+    //Datos del sensor recibidos del ESP32
+    if(Serial3.available()>0){
+    //Se lee el dato y se guarda en una variable
+    humedad = Serial3.readStringUntil('\n');
+    }
+    //Fondo Blanco
+    FillRect(30, 30, 259, 179, 0xffff);
+    //Si se escoge realizar una medición
+    LCD_Print("Humedad:", 100, 80, 2, celeste, 0xffff);
+    LCD_Print(humedad, 140, 120, 2, celeste, 0xffff);
+    LCD_Print("%", 170, 120, 2, celeste, 0xffff);
+    //Si no hay tanta humedad solo aparece una gota
+    if(humedad.toInt() < 34){
+      LCD_Bitmap(144, 160, 32, 32, gota);
+    }
+    //Si hay una humedad moderada aparecen dos gotas
+    if(35 < humedad.toInt() && humedad.toInt() < 67){
+      LCD_Bitmap(123, 160, 32, 32, gota);
+      LCD_Bitmap(170, 160, 32, 32, gota);
+    }
+    //Si hay una humedad moderada aparecen dos gotas
+     if(humedad.toInt() > 68){
+      LCD_Bitmap(107, 160, 32, 32, gota);
+      LCD_Bitmap(144, 160, 32, 32, gota);
+      LCD_Bitmap(180, 160, 32, 32, gota);
+    }
     //Sonido de medición 
     tone(sound,440,100);
     delay(100);
@@ -219,14 +262,6 @@ void loop() {
     noTone(sound);   
     estado = 0;
   }
-
-  //Datos del sensor recibidos del ESP32
-  if(Serial3.available()>0){
-    //Se lee el dato y se guarda en una variable
-    humedad = Serial3.readStringUntil('\n');
-    
-  }
-
 
   //Si se presiona el botón 2, se guardan los datos en la memoria SD
   if(digitalRead(boton2)==0){
@@ -269,7 +304,7 @@ void loop() {
   }
 
   
-  delay(500);
+  delay(5000);
 }
 
 //-------------------------------------------------------------------------------------------------
