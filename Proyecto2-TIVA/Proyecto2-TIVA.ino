@@ -118,6 +118,42 @@ void setup() {
   pinMode(sound, OUTPUT);
 
   //Pantalla 
+  SysCtlClockSet(SYSCTL_SYSDIV_2_5|SYSCTL_USE_PLL|SYSCTL_OSC_MAIN|SYSCTL_XTAL_16MHZ);
+  SPI.setModule(0);
+  LCD_Init();
+  LCD_Clear(0x00);
+  //Marco Negro
+  FillRect(0, 0, 319, 239, 0x0000);
+  //Marco celeste
+  FillRect(10, 10, 299, 219, celeste);
+  //Marco negro 2
+  FillRect(20, 20, 279, 199, 0x0000);
+  //Fondo Blanco
+  FillRect(30, 30, 259, 179, 0xffff);
+  //Se muesta al encender el dispositivo
+  String portada = "HumE";
+  LCD_Print(portada, 120, 110, 2, celeste, 0xffff);
+  LCD_Bitmap(200, 100, 32, 32, gota);
+  delay(1000);
+  //Fondo Blanco
+  FillRect(30, 30, 259, 179, 0xffff);
+  //Pantalla de carga
+  LCD_Bitmap(40, 40, 32, 32, gota);
+  LCD_Bitmap(144, 40, 32, 32, gota);
+  LCD_Bitmap(249, 40, 32, 32, gota);
+  delay(100);
+  LCD_Bitmap(40, 80, 32, 32, gota);
+  LCD_Bitmap(144, 80, 32, 32, gota);
+  LCD_Bitmap(249, 80, 32, 32, gota);
+  delay(100);
+  LCD_Bitmap(40, 120, 32, 32, gota);
+  LCD_Bitmap(144, 120, 32, 32, gota);
+  LCD_Bitmap(249, 120, 32, 32, gota);
+  delay(100);
+  LCD_Bitmap(40, 160, 32, 32, gota);
+  LCD_Bitmap(144, 160, 32, 32, gota);
+  LCD_Bitmap(249, 160, 32, 32, gota);
+  delay(100);
 }
 
 //-------------------------------------------------------------------------------------------------
