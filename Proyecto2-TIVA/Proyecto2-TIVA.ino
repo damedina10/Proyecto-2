@@ -114,7 +114,7 @@ void setup() {
   if (!SD.begin(PB_5)) {
     Serial.println("Ha ocurrido un error!");
     return;
-  
+  }
   //Configuración buzzer
   pinMode(sound, OUTPUT);
 
@@ -346,7 +346,7 @@ void memoriaSD(void){
     Serial.println(humedad);
 
     //Se imprimen los datos en la memoria SD
-    archivo.print("28/10/21");
+    archivo.print("6/11/21");
     archivo.print(",");
     archivo.println(humedad);
    
