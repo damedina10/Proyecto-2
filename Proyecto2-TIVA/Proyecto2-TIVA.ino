@@ -207,14 +207,14 @@ void loop() {
     FillRect(30, 30, 259, 179, 0xffff);
     //Si se escoge realizar una medición
     LCD_Print("Humedad:", 100, 80, 2, celeste, 0xffff);
-    LCD_Print(humedad, 140, 120, 2, celeste, 0xffff);
-    LCD_Print("%", 170, 120, 2, celeste, 0xffff);
+    LCD_Print(humedad, 110, 120, 2, celeste, 0xffff);
+    LCD_Print("%", 190, 120, 2, celeste, 0xffff);
     //Si no hay tanta humedad solo aparece una gota
     if(humedad.toInt() < 34){
       LCD_Bitmap(144, 160, 32, 32, gota);
     }
     //Si hay una humedad moderada aparecen dos gotas
-    if(35 < humedad.toInt() && humedad.toInt() < 67){
+    if(34 < humedad.toInt() && humedad.toInt() < 68){
       LCD_Bitmap(123, 160, 32, 32, gota);
       LCD_Bitmap(170, 160, 32, 32, gota);
     }
